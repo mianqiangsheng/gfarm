@@ -1,0 +1,11 @@
+
+spring:
+  profiles:
+    active: dev
+
+  datasource:
+    username: '@mysql.datasource.username@'
+    password: '@mysql.datasource.password@'
+    url: '@mysql.datasource.url@'
+    driver-class-name: '@mysql.datasource.driverClassName@'
+
