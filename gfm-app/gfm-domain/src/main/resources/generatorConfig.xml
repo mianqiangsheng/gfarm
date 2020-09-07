@@ -91,6 +91,10 @@
             <property name="useActualColumnNames" value="false" />
             <property name="modelOnly" value="false"/>
         </table>
+        <table tableName="gf_comrade" domainObjectName="GfComrade">
+            <property name="useActualColumnNames" value="false" />
+            <property name="modelOnly" value="false"/>
+        </table>
 
         <!-- geelynote mybatis插件的搭建 -->
     </context>

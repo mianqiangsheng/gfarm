@@ -3,10 +3,8 @@ package org.gfarm.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.gfarm.dto.request.GfTestDto;
-import org.gfarm.entity.GfTest;
 import org.gfarm.entity.GfTestExample;
 
-import java.util.List;
 
 public interface GfTestService {
 
@@ -16,5 +14,5 @@ public interface GfTestService {
 
     int deleteByExample(GfTestExample example);
 
-    int updateByExampleSelective(GfTest record, GfTestExample example);
+    int updateByExampleSelective(GfTestDto gfTestDto, GfTestExample example);
 }

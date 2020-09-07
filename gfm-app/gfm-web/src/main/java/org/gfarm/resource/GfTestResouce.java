@@ -15,14 +15,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @RestController
-@RequestMapping("/fuji")
+@RequestMapping("/fuji/test")
 @Validated
 public class GfTestResouce {
 
     @Resource
     private GfTestService gfTestService;
 
-    @RequestMapping(value = "/test/add", name = "样例方法-插入记录", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", name = "样例方法-插入记录", method = RequestMethod.POST)
     public ResponseEntity<String> insert(@RequestBody GfTestDto gfTestDto) {
 
         int insert = gfTestService.insert(gfTestDto);
@@ -30,7 +30,7 @@ public class GfTestResouce {
         return ResponseEntity.ok("插入成功");
     }
 
-    @RequestMapping(value = "/test/list", name = "样例方法-条件记录", method = RequestMethod.POST)
+    @RequestMapping(value = "/list", name = "样例方法-条件查询", method = RequestMethod.POST)
     public ResponseEntity<IPage<GfTestDto>> list(@RequestBody GfTestDto gfTestDto, Integer pageNum, Integer pageSize) {
 
         IPage<GfTestDto> gfTestDtoIPage = gfTestService.pageList(gfTestDto, pageNum, pageSize);
@@ -38,5 +38,10 @@ public class GfTestResouce {
         return ResponseEntity.ok(gfTestDtoIPage);
     }
 
+    @RequestMapping(value = "/get", name = "样例方法-条件查询", method = RequestMethod.GET)
+    public ResponseEntity<String> list() {
+
+        return ResponseEntity.ok("success");
+    }
 
 }

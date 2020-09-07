@@ -10,6 +10,7 @@
         <version>2.3.3.RELEASE</version>
     </parent>
 
+
     <groupId>org.gfarm</groupId>
     <artifactId>gfm-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -17,13 +18,50 @@
         <module>gfm-app</module>
         <module>gfm-web-core</module>
         <module>gfm-batch</module>
+        <module>gfm-uaa</module>
     </modules>
     <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.spring.platform</groupId>
+            <artifactId>platform-bom</artifactId>
+            <version>Cairo-RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>Finchley.SR2</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+            <version>${spring.cloud.starter.oauth2}</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>1.64</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+
+        <spring.cloud.starter.oauth2>2.2.4.RELEASE</spring.cloud.starter.oauth2>
     </properties>
 
 

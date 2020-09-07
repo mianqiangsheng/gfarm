@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.gfarm.mapper.GfComradeMapper">
+  <resultMap id="GfComradeResultMap" type="org.gfarm.entity.GfComrade">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="member_id" jdbcType="VARCHAR" property="memberId" />
+    <result column="discord_name" jdbcType="VARCHAR" property="discordName" />
+    <result column="rule_donate" jdbcType="DECIMAL" property="ruleDonate" />
+    <result column="peculiar_chair" jdbcType="TINYINT" property="peculiarChair" />
+    <result column="vog_investor" jdbcType="DECIMAL" property="vogInvestor" />
+    <result column="loaner" jdbcType="DECIMAL" property="loaner" />
+    <result column="gdollar_investor" jdbcType="DECIMAL" property="gdollarInvestor" />
+    <result column="g1_investor" jdbcType="DECIMAL" property="g1Investor" />
+    <result column="parade" jdbcType="TINYINT" property="parade" />
+    <result column="drink_tea" jdbcType="TINYINT" property="drinkTea" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, member_id, discord_name, rule_donate, peculiar_chair, vog_investor, loaner, gdollar_investor, 
+    g1_investor, parade, drink_tea, remarks
+  </sql>
+  <select id="selectByExample" parameterType="org.gfarm.entity.GfComradeExample" resultMap="GfComradeResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gf_comrade
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="GfComradeResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gf_comrade
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gf_comrade
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.gfarm.entity.GfComradeExample">
+    delete from gf_comrade
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.gfarm.entity.GfComrade">
+    insert into gf_comrade (id, member_id, discord_name, 
+      rule_donate, peculiar_chair, vog_investor, 
+      loaner, gdollar_investor, g1_investor, 
+      parade, drink_tea, remarks
+      )
+    values (#{id,jdbcType=INTEGER}, #{memberId,jdbcType=VARCHAR}, #{discordName,jdbcType=VARCHAR}, 
+      #{ruleDonate,jdbcType=DECIMAL}, #{peculiarChair,jdbcType=TINYINT}, #{vogInvestor,jdbcType=DECIMAL}, 
+      #{loaner,jdbcType=DECIMAL}, #{gdollarInvestor,jdbcType=DECIMAL}, #{g1Investor,jdbcType=DECIMAL}, 
+      #{parade,jdbcType=TINYINT}, #{drinkTea,jdbcType=TINYINT}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.gfarm.entity.GfComrade">
+    insert into gf_comrade
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="discordName != null">
+        discord_name,
+      </if>
+      <if test="ruleDonate != null">
+        rule_donate,
+      </if>
+      <if test="peculiarChair != null">
+        peculiar_chair,
+      </if>
+      <if test="vogInvestor != null">
+        vog_investor,
+      </if>
+      <if test="loaner != null">
+        loaner,
+      </if>
+      <if test="gdollarInvestor != null">
+        gdollar_investor,
+      </if>
+      <if test="g1Investor != null">
+        g1_investor,
+      </if>
+      <if test="parade != null">
+        parade,
+      </if>
+      <if test="drinkTea != null">
+        drink_tea,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="discordName != null">
+        #{discordName,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleDonate != null">
+        #{ruleDonate,jdbcType=DECIMAL},
+      </if>
+      <if test="peculiarChair != null">
+        #{peculiarChair,jdbcType=TINYINT},
+      </if>
+      <if test="vogInvestor != null">
+        #{vogInvestor,jdbcType=DECIMAL},
+      </if>
+      <if test="loaner != null">
+        #{loaner,jdbcType=DECIMAL},
+      </if>
+      <if test="gdollarInvestor != null">
+        #{gdollarInvestor,jdbcType=DECIMAL},
+      </if>
+      <if test="g1Investor != null">
+        #{g1Investor,jdbcType=DECIMAL},
+      </if>
+      <if test="parade != null">
+        #{parade,jdbcType=TINYINT},
+      </if>
+      <if test="drinkTea != null">
+        #{drinkTea,jdbcType=TINYINT},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.gfarm.entity.GfComradeExample" resultType="java.lang.Long">
+    select count(*) from gf_comrade
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gf_comrade
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discordName != null">
+        discord_name = #{record.discordName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleDonate != null">
+        rule_donate = #{record.ruleDonate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.peculiarChair != null">
+        peculiar_chair = #{record.peculiarChair,jdbcType=TINYINT},
+      </if>
+      <if test="record.vogInvestor != null">
+        vog_investor = #{record.vogInvestor,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loaner != null">
+        loaner = #{record.loaner,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gdollarInvestor != null">
+        gdollar_investor = #{record.gdollarInvestor,jdbcType=DECIMAL},
+      </if>
+      <if test="record.g1Investor != null">
+        g1_investor = #{record.g1Investor,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parade != null">
+        parade = #{record.parade,jdbcType=TINYINT},
+      </if>
+      <if test="record.drinkTea != null">
+        drink_tea = #{record.drinkTea,jdbcType=TINYINT},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gf_comrade
+    set id = #{record.id,jdbcType=INTEGER},
+      member_id = #{record.memberId,jdbcType=VARCHAR},
+      discord_name = #{record.discordName,jdbcType=VARCHAR},
+      rule_donate = #{record.ruleDonate,jdbcType=DECIMAL},
+      peculiar_chair = #{record.peculiarChair,jdbcType=TINYINT},
+      vog_investor = #{record.vogInvestor,jdbcType=DECIMAL},
+      loaner = #{record.loaner,jdbcType=DECIMAL},
+      gdollar_investor = #{record.gdollarInvestor,jdbcType=DECIMAL},
+      g1_investor = #{record.g1Investor,jdbcType=DECIMAL},
+      parade = #{record.parade,jdbcType=TINYINT},
+      drink_tea = #{record.drinkTea,jdbcType=TINYINT},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.gfarm.entity.GfComrade">
+    update gf_comrade
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="discordName != null">
+        discord_name = #{discordName,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleDonate != null">
+        rule_donate = #{ruleDonate,jdbcType=DECIMAL},
+      </if>
+      <if test="peculiarChair != null">
+        peculiar_chair = #{peculiarChair,jdbcType=TINYINT},
+      </if>
+      <if test="vogInvestor != null">
+        vog_investor = #{vogInvestor,jdbcType=DECIMAL},
+      </if>
+      <if test="loaner != null">
+        loaner = #{loaner,jdbcType=DECIMAL},
+      </if>
+      <if test="gdollarInvestor != null">
+        gdollar_investor = #{gdollarInvestor,jdbcType=DECIMAL},
+      </if>
+      <if test="g1Investor != null">
+        g1_investor = #{g1Investor,jdbcType=DECIMAL},
+      </if>
+      <if test="parade != null">
+        parade = #{parade,jdbcType=TINYINT},
+      </if>
+      <if test="drinkTea != null">
+        drink_tea = #{drinkTea,jdbcType=TINYINT},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.gfarm.entity.GfComrade">
+    update gf_comrade
+    set member_id = #{memberId,jdbcType=VARCHAR},
+      discord_name = #{discordName,jdbcType=VARCHAR},
+      rule_donate = #{ruleDonate,jdbcType=DECIMAL},
+      peculiar_chair = #{peculiarChair,jdbcType=TINYINT},
+      vog_investor = #{vogInvestor,jdbcType=DECIMAL},
+      loaner = #{loaner,jdbcType=DECIMAL},
+      gdollar_investor = #{gdollarInvestor,jdbcType=DECIMAL},
+      g1_investor = #{g1Investor,jdbcType=DECIMAL},
+      parade = #{parade,jdbcType=TINYINT},
+      drink_tea = #{drinkTea,jdbcType=TINYINT},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

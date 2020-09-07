@@ -13,8 +13,6 @@ import org.gfarm.util.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class GfTestServiceImpl implements GfTestService {
@@ -62,8 +60,10 @@ public class GfTestServiceImpl implements GfTestService {
     }
 
     @Override
-    public int updateByExampleSelective(GfTest record, GfTestExample example) {
-        int i = gfTestMapper.updateByExampleSelective(record, example);
+    public int updateByExampleSelective(GfTestDto gfTestDto, GfTestExample example) {
+        GfTest gfTest = new GfTest();
+        BeanUtils.copyPropertiesIgnoreNull(gfTestDto,gfTest);
+        int i = gfTestMapper.updateByExampleSelective(gfTest, example);
         return i;
     }
 }
