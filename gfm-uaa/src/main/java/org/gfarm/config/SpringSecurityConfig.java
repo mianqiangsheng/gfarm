@@ -37,6 +37,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
+    /**
+     * springboot2.0 的自动配置发生略微的变更，原先的自动配置现在需要通过@Bean暴露，否则你会得到AuthenticationManager找不到的异常
+     * @return
+     * @throws Exception
+     */
     @Override
     @Bean
     protected AuthenticationManager authenticationManager() throws Exception {
@@ -51,6 +56,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/oauth/**").authenticated()
                 .and()
-                .formLogin().permitAll();
+                .formLogin().permitAll()
+        ;
     }
 }

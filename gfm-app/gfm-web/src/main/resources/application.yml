@@ -5,6 +5,10 @@ spring:
 
 server:
   port: 8086
+  servlet:
+    session:
+      cookie:
+        name: OAUTHSESSION #关键！鉴权成功后，对于单点登录过滤链来说，只需要携带这个session cookie就能继续访问；对于token过滤链则无用
 
 auth-server: http://localhost:8085/uac
 
@@ -18,3 +22,4 @@ security:
     resource:
       jwt:
         key-uri: ${auth-server}/oauth/token_key
+      user-info-uri: ${auth-server}/user/me
