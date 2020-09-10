@@ -12,7 +12,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.endpoint.TokenKeyEndpoint;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -37,10 +36,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("sheep1")
                 .secret(new BCryptPasswordEncoder().encode("123456"))
-                .authorizedGrantTypes("authorization_code", "refresh_token","client_credentials","password")
+                .authorizedGrantTypes("authorization_code", "refresh_token","client_credentials","password","implicit")
                 .scopes("all")
                 .autoApprove(false)
-                .redirectUris("http://localhost:8086/login")
+                .redirectUris("http://localhost:8086/login","https://www.baidu.com")
                 .and()
                 .withClient("sheep2")
                 .secret(new BCryptPasswordEncoder().encode("123456"))
@@ -55,7 +54,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         security
                 .tokenKeyAccess("permitAll()")                    //oauth/token_key是公开
                 .checkTokenAccess("permitAll()")                  //oauth/check_token公开
-                .allowFormAuthenticationForClients()				//表单认证（申请令牌）
+                .allowFormAuthenticationForClients()			  //表单认证（申请令牌）,即可以通过postman发送http请求获取token
         ;
     }
 

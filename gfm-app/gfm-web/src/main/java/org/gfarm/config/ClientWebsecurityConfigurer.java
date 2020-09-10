@@ -18,6 +18,8 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 /**
  * @EnableOAuth2Sso 将您的服务标记为OAuth2.0客户端。这意味着它将负责将资源所有者(最终用户)重定向到用户必须输入其凭据的授权服务器。完成后，用户将被重定向回具有授权码的客户端(不要与访问代码混淆)。然后客户端通过调用授权服务器获取授权代码并将其交换为访问令牌。只有在此之后，客户端才能使用访问令牌调用资源服务器。
+ * 该注释会使用grant_type=authorization_code自动处理后续的鉴权+返回token+带token访问流程
+ * 如果不使用该注释，则不会自动进行，需要手动走一系列流程获取token
  *
  * 另外，如果你看一下@ EnableOAuth2Sso注释的源代码，你会看到两件有趣的事情：
  * > @ EnableOAuth2Client。这是您的服务成为OAuth 2.0客户端的地方。如果您通过OAuth2RestTemplate调用这些服务，则可以将访问令牌(在交换授权代码之后)转发到下游服务。
@@ -29,7 +31,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableOAuth2Sso
+//@EnableOAuth2Sso
 public class ClientWebsecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override

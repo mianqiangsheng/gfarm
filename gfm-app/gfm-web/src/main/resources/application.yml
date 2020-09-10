@@ -22,4 +22,4 @@ security:
     resource:
       jwt:
         key-uri: ${auth-server}/oauth/token_key
-      user-info-uri: ${auth-server}/user/me
+      user-info-uri: ${auth-server}/oauth2/client
