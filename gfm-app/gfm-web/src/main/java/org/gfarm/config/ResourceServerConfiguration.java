@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
  *  Spring Security为每个配置创建一个过滤器链。每个过滤器链的请求匹配器按照配置顺序进行评估。
@@ -16,14 +17,26 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
     @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        //指定资源服务器ID
+        //我们可以为每一个Resource Server（一个微服务实例）设置一个resourceid。
+        // Authorization Server给client第三方客户端授权的时候，可以设置这个client可以访问哪一些Resource Server资源服务，
+        // 如果没设置，就是对所有的Resource Server都有访问权限。
+        resources.resourceId("gfm-web");
+    }
+
+    @Override
     public void configure(HttpSecurity http) throws Exception {
 
         // 仅对访问路径 /fuji/test/** 调用此过滤器链，即只对特定的请求使用token鉴权访问
         http
-                .requestMatchers().antMatchers("/fuji/test/**")
+                .requestMatchers().antMatchers("/fuji/**")
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()
         ;
     }
+
+
+
 }

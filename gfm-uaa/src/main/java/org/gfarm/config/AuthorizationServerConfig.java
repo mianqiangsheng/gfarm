@@ -39,21 +39,23 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authorizedGrantTypes("authorization_code", "refresh_token","client_credentials","password","implicit")
                 .scopes("all")
                 .autoApprove(false)
-                .redirectUris("http://localhost:8086/login","https://www.baidu.com")
+                .resourceIds("gfm-web","gfm-batch") //指定这个客户端可以访问哪些资源服务器
+                .redirectUris("http://localhost:8086/login","http://localhost:8087/login","https://www.baidu.com")
                 .and()
                 .withClient("sheep2")
                 .secret(new BCryptPasswordEncoder().encode("123456"))
                 .authorizedGrantTypes("authorization_code", "refresh_token","client_credentials","password")
                 .scopes("all")
                 .autoApprove(true)
+                .resourceIds("gfm-batch") //指定这个客户端可以访问哪些资源服务器
                 .redirectUris("http://localhost:8087/login");
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
-                .tokenKeyAccess("permitAll()")                    //oauth/token_key是公开
-                .checkTokenAccess("permitAll()")                  //oauth/check_token公开
+                .tokenKeyAccess("permitAll()")                    //oauth/token_key是公开，不然资源服务器 来请求403
+                .checkTokenAccess("isAuthenticated()")            //oauth/check_token公开
                 .allowFormAuthenticationForClients()			  //表单认证（申请令牌）,即可以通过postman发送http请求获取token
         ;
     }

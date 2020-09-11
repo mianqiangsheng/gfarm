@@ -42,22 +42,8 @@ public class ClientWebsecurityConfigurer extends WebSecurityConfigurerAdapter {
         http
                 .requestMatcher(nonResoures)
                 .authorizeRequests()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
         ;
     }
 
-    @Bean
-    public TokenStore tokenStore() {
-        return new JwtTokenStore(jwtAccessTokenConverter());
-    }
-
-    /**
-     * 与授权服务器使用共同的密钥进行解析
-     */
-    @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("testKey");
-        return converter;
-    }
 }

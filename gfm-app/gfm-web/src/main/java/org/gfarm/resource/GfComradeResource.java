@@ -50,6 +50,7 @@ public class GfComradeResource {
     }
 
     @RequestMapping(value = "/update", name = "战友信息-更新", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<String> update(@RequestBody GfComradeDto gfComradeDto) {
 
         int i = gfComradeService.updateByPrimaryKey(gfComradeDto);

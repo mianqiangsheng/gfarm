@@ -12,4 +12,12 @@
     <artifactId>gfm-batch</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.gfarm</groupId>
+            <artifactId>gfm-web-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>
