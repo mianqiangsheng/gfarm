@@ -8,29 +8,13 @@ server:
   servlet:
     session:
       cookie:
-        name: OAUTHSESSION #鉴权成功后，对于单点登录过滤链来说，只需要携带这个session cookie就能继续访问；对于token过滤链则无用
+        name: OAUTHSESSION
 
 auth-server: http://localhost:8085/uac
 
-#security:
-#  oauth2:
-#    security:
-#      oauth2:
-#        client: #配置app-client端信息，比如这里配置了clientId,clientSecret,认证服务器请求token相关的url
-#          client-id: sheep2
-#          client-secret: 123456
-#          user-authorization-uri: ${auth-server}/oauth/authorize
-#          access-token-uri: ${auth-server}/oauth/token
-#    resource:  #配置resource-server端信息，比如这里配置了获得JWT—token的公钥地址,校验token地址
-#      jwt:
-#        key-uri: ${auth-server}/oauth/token_key
-#        user-info-uri: ${auth-server}/oauth2/client
-#      token-info-uri: ${auth-server}/oauth2/check_token
-#      id: gfm-batch
-
 security:
   oauth2:
-    client:  #配置app-client端信息，比如这里配置了clientId,clientSecret,认证服务器请求token相关的url
+    client:  #配置app-client端信息，资源服务器也可以作为client端请求授权服务器
       client-id: sheep1
       client-secret: 123456
       user-authorization-uri: ${auth-server}/oauth/authorize
@@ -38,5 +22,6 @@ security:
     resource:  #配置resource-server端信息，比如这里配置了获得JWT—token的公钥地址,校验token地址
       jwt:
         key-uri: ${auth-server}/oauth/token_key
-        user-info-uri: ${auth-server}/oauth2/client
-      token-info-uri: ${auth-server}/oauth2/check_token
+        user-info-uri: ${auth-server}/oauth/client
+      token-info-uri: ${auth-server}/oauth/check_token
+      id: gfm-batch #无效

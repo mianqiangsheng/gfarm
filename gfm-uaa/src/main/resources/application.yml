@@ -2,3 +2,43 @@ server:
   port: 8085
   servlet:
     context-path: /uac
+
+config:
+  oauth2:
+    # 使用OpenSSL工具生成rsa_private_key.pem和rsa_public_key.pem
+    privateKey: -----BEGIN RSA PRIVATE KEY-----
+      MIIEpAIBAAKCAQEA1Lvg42TotYw82+CQqu7ST+eSic3g9+0ph2E+Hl7R10wrH6QS
+      NuZV23fd79eordJlIBtFAP9earSSmz9vk1UxNlFs3HaenEdIunPEPiJqsNf3eXZ6
+      /xz6nWnw9eEf2h50sIDRdR+2dc390/BoP6Xx/hw2goYAmXJabOTlhVimX0elOUZr
+      kdv6+MPqydxNQf3CWmz9ez47v/QGayofyc2er+5DAukT+hGvlZTx5l5OKag33hbY
+      J9NOyPgxA3IUZqdGKQ/yUIgo6w1mlysYWgcxafBMVJZEoFoLxFmSJ+Y6VUpggMeC
+      D+v55evaNXGBjtVVfROyXZnyZiGe/8FbmAq6PwIDAQABAoIBAQCZMTp/Rfl2Uyi4
+      RfynuxdkRyR1a/anUvfm75XmFO4Tllwvit06/5+wTZ9ayfhERBBikICeeUcqnCI+
+      /e2BMYYg0X4NPLZ3X7X13svg2rPt6Xfi1fk4oUuv88x7o8RmNCxftkQfjdi8+Lvi
+      1Wqc+wlKrlJqp8jit0B6zlKiNfaJASTN3hN9nmx6LFZXv4M4coblG9/eSroIwKb+
+      tbg1uR9rNSNoevmqb79sSJJ96M4F7k+MNSKwiGZXm3Chxe6T7NQWw69VELa1lp75
+      arKDB86GKNZ9atZfw6ok3KjrMnj/kWDTPtpkJe2sY487lJhJZ6AdUlwFp7L4NHLA
+      d+EbSm+BAoGBAOxuItowfWk1usd6L1uN8A5mg1+ZMF5R4malzLGxqOIp6BJgtzKB
+      HKwxXhowcsqa+HQcIQw62ZmIFX6PwWDA12TLLwUcA0MhMQi4V5NCCYVdOq/+QAKv
+      ihOErNmsnJ0jIAaN6MYGEJ0zEJ3JdRyENp94OkMBJdfYgSR81yl/T86hAoGBAOZX
+      oGiwIeb0XGZjndOTinqeYEw2SspOaIDB8ZZu7U2zbG0TEy2BG5TlWRPMumE/1d5d
+      9nQYZbxp5TOtOrrGsrUuffwTKKElc0gj1mUti7qpyEcsKQpvTHt5MNxTsU5hAjgp
+      fB7dsIVhTIsXZgJDSK6uE+nuZMKUnd6hXTTeGDzfAoGACyTRzbj1YE0hBZ/ztXwG
+      MZeRX6MnzXpMkowEDugRzr8s6hjW6bF+OXuGNPPNpVESnt5ojFwFv5/Ta4i5E6dj
+      P6P4DmSYnsRkvEV8EzvMmRWg24S/XaEKgAsD3qqtIxbxvn1X2GWWyOIMSXOianqs
+      3G1dSaU3NGpHBAJCXflbOKECgYEAvVm3QZfYprSl6H1nVm/o3FepLb1LyfaerYnB
+      ATr61G70aM3PbA7AD6xhh4c6h4skUoHHgTQ1HaenhM2Yg8WnTo2Df154fc/9boYX
+      TmEchjvfqbJBopRPuQitA9HA5X+VhXmE0RLIczzC4WxArQeGjiIHuLwCFHp7NHJN
+      3pHcNt0CgYADHr/6+4D4Iu4ntJLSFjkgkyCx6uN6SPi0U56Rn09jdtWHIQ1aidyw
+      ZFHkbSJW63+6B2FlVxsVy13JQO0T89QbCeGEDari8uyGJxsTo+zWY8ubuBK6wyHP
+      O7oAO7UO/P5xtZ2895OdicU+zJmYRlWlAxto7yviQ63gU6J9rw68vg==
+      -----END RSA PRIVATE KEY-----
+    publicKey: -----BEGIN PUBLIC KEY-----
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1Lvg42TotYw82+CQqu7S
+      T+eSic3g9+0ph2E+Hl7R10wrH6QSNuZV23fd79eordJlIBtFAP9earSSmz9vk1Ux
+      NlFs3HaenEdIunPEPiJqsNf3eXZ6/xz6nWnw9eEf2h50sIDRdR+2dc390/BoP6Xx
+      /hw2goYAmXJabOTlhVimX0elOUZrkdv6+MPqydxNQf3CWmz9ez47v/QGayofyc2e
+      r+5DAukT+hGvlZTx5l5OKag33hbYJ9NOyPgxA3IUZqdGKQ/yUIgo6w1mlysYWgcx
+      afBMVJZEoFoLxFmSJ+Y6VUpggMeCD+v55evaNXGBjtVVfROyXZnyZiGe/8FbmAq6
+      PwIDAQAB
+      -----END PUBLIC KEY-----

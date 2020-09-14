@@ -1,6 +1,7 @@
 package org.gfarm.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -30,6 +31,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private UserDetailsService userDetailsService;
 
+    //非对称加密方式——RSA配置——连接资源服务器和授权服务器
+    @Value("${config.oauth2.privateKey}")
+    private String privateKey ;
+    @Value("${config.oauth2.publicKey}")
+    private String publicKey;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 定义了两个客户端应用的通行证
@@ -39,8 +46,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authorizedGrantTypes("authorization_code", "refresh_token","client_credentials","password","implicit")
                 .scopes("all")
                 .autoApprove(false)
-                .resourceIds("gfm-web","gfm-batch") //指定这个客户端可以访问哪些资源服务器
-                .redirectUris("http://localhost:8086/login","http://localhost:8087/login","https://www.baidu.com")
+                .resourceIds("gfm-web","gfm-batch") //指定这个客户端可以访问哪些资源服务器,如果不设置则该clientId可以访问所有资源服务器
+                .redirectUris("http://localhost:8086/login","http://localhost:8087/login","https://www.baidu.com") //指定哪些跳转url可接受
                 .and()
                 .withClient("sheep2")
                 .secret(new BCryptPasswordEncoder().encode("123456"))
@@ -55,7 +62,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
                 .tokenKeyAccess("permitAll()")                    //oauth/token_key是公开，不然资源服务器 来请求403
-                .checkTokenAccess("isAuthenticated()")            //oauth/check_token公开
+                .checkTokenAccess("isAuthenticated()")            //oauth/check_token
                 .allowFormAuthenticationForClients()			  //表单认证（申请令牌）,即可以通过postman发送http请求获取token
         ;
     }
@@ -86,8 +93,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter(){
+
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("testKey");
+        converter.setSigningKey("testKey");//对称加密方式
+
+        converter.setSigningKey(privateKey);//非对称加密方式——私钥
+        converter.setVerifierKey(publicKey);//非对称加密方式——公钥
         return converter;
     }
 

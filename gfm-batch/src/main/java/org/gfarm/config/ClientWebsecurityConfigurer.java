@@ -43,13 +43,19 @@ public class ClientWebsecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
+        RequestMatcher nonResoures = new NegatedRequestMatcher(new AntPathRequestMatcher("/fuji/batch/**"));
+
+
         http
-                .antMatcher("/**")
+                //除了/fuji/batch/**以外的路径均需经过这条过滤器链
+                .requestMatcher(nonResoures)
                 .authorizeRequests()
-                .antMatchers("/oauth**", "/login**", "/error**")
+                //针对/oauth/**（/oauth/get）访问和/login**（/login123）这些路径放行
+                .antMatchers("/oauth/**", "/login**", "/error**")
                 .permitAll()
                 .and()
                 .authorizeRequests()
+                //剩下的路径均需登录
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll();
