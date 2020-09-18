@@ -21,7 +21,11 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .requestMatchers().antMatchers("/fuji/batch/**")
                 .and()
                 .authorizeRequests()
-                .anyRequest().authenticated()
+                .anyRequest()
+                //对于/fuji/batch路径只有当访问者（client）拥有read scope时，才被允许
+                .access("#oauth2.hasScope('read')")
+                //如果不使用.access()权限控制，.authenticated()表示只要授权通过即可访问
+//                .authenticated()
         ;
     }
 

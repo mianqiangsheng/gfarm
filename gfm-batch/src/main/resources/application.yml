@@ -15,10 +15,11 @@ auth-server: http://localhost:8085/uac
 security:
   oauth2:
     client:  #配置app-client端信息，资源服务器也可以作为client端请求授权服务器
-      client-id: sheep1
-      client-secret: 123456
-      user-authorization-uri: ${auth-server}/oauth/authorize
-      access-token-uri: ${auth-server}/oauth/token
+             #对于资源服务器来说，以下客户端信息是非必须的，只要授权服务器的公钥使用的是RsaSigner非对称密钥就可以不登陆请求/oauth/token_key获取公钥（因为非对称，所以不必担心伪造token）
+#      client-id: sheep1
+#      client-secret: 123456
+#      user-authorization-uri: ${auth-server}/oauth/authorize
+#      access-token-uri: ${auth-server}/oauth/token
     resource:  #配置resource-server端信息，比如这里配置了获得JWT—token的公钥地址,校验token地址
       jwt:
         key-uri: ${auth-server}/oauth/token_key
