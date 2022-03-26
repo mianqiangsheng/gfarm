@@ -45,7 +45,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .secret(new BCryptPasswordEncoder().encode("123456"))
                 .authorizedGrantTypes("authorization_code", "refresh_token","client_credentials","password","implicit")
                 .scopes("read") //指定这个客户端可以访问哪些资源域，可以多个，配合资源服务器的权限设置生效
-                .autoApprove(false)
+                .autoApprove(false) //设置用户是否自动Approval操作
                 .resourceIds("gfm-web","gfm-batch") //指定这个客户端可以访问哪些资源服务器,如果不设置则该clientId可以访问所有资源服务器
                 .redirectUris("http://localhost:8086/login","http://localhost:8087/login","https://www.baidu.com") //指定哪些跳转url可接受
                 .and()
