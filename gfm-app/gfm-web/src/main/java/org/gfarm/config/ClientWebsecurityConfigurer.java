@@ -27,6 +27,8 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
  * > @ EnableOAuth2Client。这是您的服务成为OAuth 2.0客户端的地方。如果您通过OAuth2RestTemplate调用这些服务，则可以将访问令牌(在交换授权代码之后)转发到下游服务。
  * > @EnableConfigurationProperties(OAuth2SsoProperties.class)。 OAuth2SsoProperties只有一个属性String loginPath，默认为/ login。这将拦截OAuth2ClientAuthenticationProcessingFilter对/ login的浏览器请求，并将用户重定向到授权服务器。
  *
+ * 参考:
+ * https://www.cnblogs.com/trust-freedom/p/12002089.html#%E4%B8%80%E4%BB%8Espring-security-oauth2%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BA%86%E8%A7%A3enableoauth2sso%E4%BD%9C%E7%94%A8
  *
  *
  */
