@@ -10,6 +10,9 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+/**
+ * @EnableResourceServer 注解标识该服务是一个资源服务器，以下配置表示/fuji/batch/**的路径均看作对该资源服务器的访问，需要首先从uaa获得令牌
+ */
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {

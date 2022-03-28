@@ -19,6 +19,8 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
  *
  * The resource server also provides a mechanism to authenticate users themselves.
  * It will be a form-based login in most cases.
+ *
+ * 这里没有@EnableOAuth2Sso注解，即没有使用UAA提供的鉴权服务，而是使用了spring security本身的登录机制
  */
 @Configuration
 @EnableWebSecurity
@@ -58,7 +60,7 @@ public class ClientWebsecurityConfigurer extends WebSecurityConfigurerAdapter {
                 //剩下的路径均需登录
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll();
+                .formLogin().permitAll(); //配置这句代码,才会实现自动跳转登录（非uaa，是spring security本身的登录机制）
     }
 
 
