@@ -30,7 +30,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
         // 仅对访问路径 /fuji/test/** 调用此过滤器链，即只对特定的请求使用token鉴权访问
         http
-                .requestMatchers().antMatchers("/fuji/**")
+                .requestMatchers().antMatchers("/fuji/test/**")
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()

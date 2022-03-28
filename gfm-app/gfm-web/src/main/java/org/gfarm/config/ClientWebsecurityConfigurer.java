@@ -3,6 +3,7 @@ package org.gfarm.config;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,9 +41,14 @@ public class ClientWebsecurityConfigurer extends WebSecurityConfigurerAdapter {
         RequestMatcher nonResoures = new NegatedRequestMatcher(new AntPathRequestMatcher("/fuji/test/**"));
 
         http
+                .csrf().disable()//禁用CSRF,不然会影响权限校验
                 .requestMatcher(nonResoures)
-                .authorizeRequests()
-                .anyRequest().permitAll()
+                .authorizeRequests(
+                        request -> request.antMatchers((HttpMethod) null,"/fuji/**") //默认配置的请求路径只对GET方法有效,这里配置对所有HTTP方法的/fuji开头的路径放开
+                                .permitAll()
+                                .anyRequest().authenticated()
+                )
+//                .anyRequest().permitAll()
         ;
     }
 
