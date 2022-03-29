@@ -18,7 +18,7 @@ security:
       client-id: sheep1
       client-secret: 123456
       user-authorization-uri: ${auth-server}/oauth/authorize #authorization_code、implicit获取token时，需要从这个url获得授权，其中implicit直接返回token
-      access-token-uri: ${auth-server}/oauth/token #请求token的地址
+      access-token-uri: ${auth-server}/oauth/token #请求token的地址 client_credentials、password、refresh_token获取token时，需要从这个url获得授权
     resource:  #配置resource-server端信息，比如这里配置了获得JWT—token的公钥地址,校验token地址
                #token_key用来为资源服务器获取验证token的公钥，check_token也是用来为资源服务器获取验证token的地址
                #公钥进行解密token，从而验证token是否是授权服务器合法颁发的，通过即放行访问资源服务器上的资源
