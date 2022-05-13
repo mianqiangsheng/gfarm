@@ -3,6 +3,7 @@ package org.gfarm.config;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,12 +31,16 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
  * 参考:
  * https://www.cnblogs.com/trust-freedom/p/12002089.html#%E4%B8%80%E4%BB%8Espring-security-oauth2%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E4%BA%86%E8%A7%A3enableoauth2sso%E4%BD%9C%E7%94%A8
  *
- *
+ * @EnableOAuth2Sso 注解让spring security的鉴权逻辑转移到了配置的uaa，且仅对WebSecurityConfigurerAdapter下的路径生效。
+ * 由于WebSecurityConfigurerAdapter的默认优先级比ResourceServerConfigurerAdapter低，
+ * 所以当想对ResourceServerConfigurerAdapter下的路径也实现@EnableOAuth2Sso提供的自动验证功能，
+ * 需要提高WebSecurityConfigurerAdapter的优先级，这里加注解@Order(2)
  */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableOAuth2Sso
+@Order(2)
 public class ClientWebsecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -43,6 +48,9 @@ public class ClientWebsecurityConfigurer extends WebSecurityConfigurerAdapter {
 
         RequestMatcher nonResoures = new NegatedRequestMatcher(new AntPathRequestMatcher("/fuji/test/**"));
 
+        /**
+         * 对"/fuji/test/**"以外的路径进行spring security权限验证，其中对"/fuji/comrade/**","/oauth/**", "/login**", "/error**"这些路径放行
+         */
         http
                 .csrf().disable()//禁用CSRF,不然会影响权限校验
                 .requestMatcher(nonResoures)
@@ -62,6 +70,16 @@ public class ClientWebsecurityConfigurer extends WebSecurityConfigurerAdapter {
                 )
 //                .anyRequest().permitAll()
         ;
+
+        /**
+         * 对所有请求路径放行
+         */
+//        http
+//                .csrf().disable()//禁用CSRF,不然会影响权限校验
+//                .authorizeRequests()
+//                .antMatchers("/**")
+//                .permitAll()
+//        ;
     }
 
 }
